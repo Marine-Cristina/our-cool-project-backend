@@ -14,7 +14,7 @@ const eventSchema = new Schema(
     date: {
       type: Date,
     },
-    organiser: {
+    organizer: {
       type: Schema.Types.ObjectId,
       ref: "Business",
     },
