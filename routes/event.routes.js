@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 const Event = require("../models/Event.model");
+const { isAuthenticated } = require("../middleware/jwt.middleware");
+const { checkEventOrganizer } = require("../middleware/event.middleware");
 
 // GET - "/"        List of all events.
 router.get("/", (req, res) => {
@@ -16,7 +18,7 @@ router.get("/", (req, res) => {
 });
 
 // GET - "/:eventId"        Details of one event by ID.
-router.get("/:eventId", (req, res, next) => {
+router.get("/:eventId", isAuthenticated, (req, res, next) => {
   const { eventId } = req.params;
 
   Event.findById(eventId)
@@ -29,7 +31,7 @@ router.get("/:eventId", (req, res, next) => {
 });
 
 // POST - "/"       Create new event.
-router.post("/", (req, res) => {
+router.post("/", isAuthenticated, (req, res) => {
   const {
     nameOfTheEvent,
     location,
@@ -66,7 +68,7 @@ router.post("/", (req, res) => {
 });
 
 // PUT - "/:eventId"        Update specified event by ID.
-router.put("/:eventId", (req, res) => {
+router.put("/:eventId", isAuthenticated, checkEventOrganizer, (req, res) => {
   Event.findByIdAndUpdate(req.params.eventId, req.body, { new: true })
     .then((updatedEvent) => {
       console.log(req.body, updatedEvent);
@@ -78,16 +80,21 @@ router.put("/:eventId", (req, res) => {
 });
 
 // DELETE - "/:eventId"         Delete specified event by ID.
-router.delete("/events/:eventId", (req, res, next) => {
-  const { eventId } = req.params;
+router.delete(
+  "/:eventId",
+  isAuthenticated,
+  checkEventOrganizer,
+  (req, res, next) => {
+    const { eventId } = req.params;
 
-  Event.findByIdAndDelete(eventId)
-    .then(() => {
-      res.status(200).send();
-    })
-    .catch((error) => {
-      next({ ...error, message: "Error deleting Event." });
-    });
-});
+    Event.findByIdAndDelete(eventId)
+      .then(() => {
+        res.status(200).send();
+      })
+      .catch((error) => {
+        next({ ...error, message: "Error deleting Event." });
+      });
+  }
+);
 
 module.exports = router;
