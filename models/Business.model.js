@@ -6,16 +6,19 @@ const businessSchema = new Schema(
       type: String,
       required: [true, "Name is required"],
     },
+
     location: {
       type: String,
       enum: ["Burgos", "Paris"],
       default: "Point",
     },
+
     coordinates: {
       type: [Number],
       required: true,
       index: "2dsphere",
     },
+
     typeOfBusiness: {
       type: String,
       enum: [
@@ -31,15 +34,26 @@ const businessSchema = new Schema(
         "other",
       ],
     },
+
     user: {
       type: Schema.Types.ObjectId,
       ref: "User",
     },
+
     isPetFriendly: Boolean,
+
     isChildFriendly: Boolean,
+
     isEcoFriendly: Boolean,
+
     isAccessibilityFriendly: Boolean,
+
     isVeganFriendly: Boolean,
+
+    contact: {
+      type: String,
+      required: [true, "Contact info is required"],
+    },
   },
 
   {

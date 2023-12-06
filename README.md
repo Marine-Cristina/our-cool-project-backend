@@ -16,21 +16,30 @@
    [X] Event.model.js
    [X] event.routes.js
 
+6. Create 33 examples of users with Postman, export the data from MongoDB so that the other can import that file in her MongoDB.
+
+7. Do the same with Business and Events.
+
 ## IMPROVEMENTS:
 
-6. Check if the User Authentication middleware functions works properly.
+1. Check if the User Authentication middleware functions works properly.
 
-7. Create middleware functions to check the owner of each business and the organizer of each event:
+2. Create middleware functions to check the owner of each business and the organizer of each event:
    [X] business.middleware.js
    [X] event.middleware.js
 
-8. Add the previous middleware functions as callbacks in the routes so that:
+3. Add the previous middleware functions as callbacks in the routes so that:
 
 - Everyone can read the list of all businesses and events.
 - Only the users can read the details of each business and event and create one.
 - Only the owner of the business can update or delete the post of the business.
 - Only the organizer(business) of the event can update or delete the post of the event.
 
-5. Add GeoJSON to locate businesses and events in the map:
-   [ ] npm install mongoose@latest
-   [ ] Add properties to business and event Schemas.
+4. Add GeoJSON to locate businesses and events in the map:
+   [X] npm install mongoose@latest
+   [X] Add properties to business and event Schemas.
+
+5. Enable user to apload a photo of them, their business or event.
+   [ ] npm install multer
+   [ ] Update Schemas
+   [ ] Update Routes files: set a multer storage, add a route to handle photo upload
