@@ -18,11 +18,19 @@ const userSchema = new Schema(
       type: String,
       required: [true, "Name is required."],
     },
+
+    role: {
+      type : String, 
+      enum : ["user", "owner"]
+    }
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
     timestamps: true,
-  }
+  }, 
+  
+  
+  
 );
 
 const User = model("User", userSchema);
