@@ -9,10 +9,27 @@ const businessSchema = new Schema(
     location: {
       type: String,
       enum: ["Burgos", "Paris"],
+      default: "Point",
+    },
+    coordinates: {
+      type: [Number],
+      required: true,
+      index: "2dsphere",
     },
     typeOfBusiness: {
       type: String,
-      enum: ["restaurant", "shop", "coffee shop", "foodtruck", "musueum"],
+      enum: [
+        "hotel",
+        "restaurant",
+        "cafe",
+        "store",
+        "musueum",
+        "brand",
+        "supermarket",
+        "transport",
+        "workplace",
+        "other",
+      ],
     },
     user: {
       type: Schema.Types.ObjectId,

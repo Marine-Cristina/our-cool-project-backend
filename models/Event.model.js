@@ -9,6 +9,12 @@ const eventSchema = new Schema(
     location: {
       type: String,
       enum: ["Burgos", "Paris"],
+      default: "Point",
+    },
+    coordinates: {
+      type: [Number],
+      required: true,
+      index: "2dsphere",
     },
     date: {
       type: Date,
