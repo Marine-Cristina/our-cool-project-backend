@@ -9,7 +9,7 @@ const eventSchema = new Schema(
     },
     location: {
       type: String,
-      enum: [Burgos, Paris],
+      enum: ["Burgos", "Paris"],
     },
     date: {
       type: Date,
@@ -22,11 +22,11 @@ const eventSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-    price : {
-        type : Number, 
-        required : [true, "Price is required"], 
-        default : "free"
-    }, 
+    price: {
+      type: Number,
+      required: [true, "Price is required"],
+      default: "free",
+    },
     isPetFriendly: Boolean,
     isChildFriendly: Boolean,
     isEcoFriendly: Boolean,
