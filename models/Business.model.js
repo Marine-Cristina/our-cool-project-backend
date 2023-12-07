@@ -40,15 +40,30 @@ const businessSchema = new Schema(
       ref: "User",
     },
 
-    isPetFriendly: Boolean,
+    isPetFriendly: {
+      type: Boolean,
+      default: false,
+    },
 
-    isChildFriendly: Boolean,
+    isChildFriendly: {
+      type: Boolean,
+      default: false,
+    },
 
-    isEcoFriendly: Boolean,
+    isEcoFriendly: {
+      type: Boolean,
+      default: false,
+    },
 
-    isAccessibilityFriendly: Boolean,
+    isAccessibilityFriendly: {
+      type: Boolean,
+      default: false,
+    },
 
-    isVeganFriendly: Boolean,
+    isVeganFriendly: {
+      type: Boolean,
+      default: false,
+    },
 
     contact: {
       type: String,
