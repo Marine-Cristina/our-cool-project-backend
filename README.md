@@ -40,6 +40,6 @@
    [X] Add properties to business and event Schemas.
 
 5. Enable user to apload a photo of them, their business or event.
-   [ ] npm install multer
+   [ ] npm install multer/Cloudinary
    [ ] Update Schemas
    [ ] Update Routes files: set a multer storage, add a route to handle photo upload
