@@ -3,7 +3,7 @@ const router = express.Router();
 
 const Business = require("../models/Business.model");
 const { isAuthenticated } = require("../middleware/jwt.middleware");
-const { checkBusinessOwner } = require("../middleware/business.middleware");
+// const { checkBusinessOwner } = require("../middleware/business.middleware");
 
 // GET - "/"        List of all Businesses.
 router.get("/", (req, res) => {
@@ -35,6 +35,7 @@ router.post("/", isAuthenticated, (req, res, next) => {
   const {
     name,
     location,
+    coordinates,
     typeOfBusiness,
     user,
     isPetFriendly,
@@ -42,19 +43,10 @@ router.post("/", isAuthenticated, (req, res, next) => {
     isEcoFriendly,
     isAccessibilityFriendly,
     isVeganFriendly,
+    contact,
   } = req.body;
 
-  Business.create({
-    name,
-    location,
-    typeOfBusiness,
-    user,
-    isPetFriendly,
-    isChildFriendly,
-    isEcoFriendly,
-    isAccessibilityFriendly,
-    isVeganFriendly,
-  })
+  Business.create({ ...req.body, user: req.payload._id })
     .then((businessFromDB) => {
       res.status(201).json(businessFromDB);
     })
@@ -67,7 +59,7 @@ router.post("/", isAuthenticated, (req, res, next) => {
 router.put(
   "/:businessId",
   isAuthenticated,
-  checkBusinessOwner,
+  // checkBusinessOwner,
   (req, res, next) => {
     const { businessId } = req.params;
 
@@ -86,7 +78,7 @@ router.put(
 router.delete(
   "/:businessId",
   isAuthenticated,
-  checkBusinessOwner,
+  // checkBusinessOwner,
   (req, res, next) => {
     const { businessId } = req.params;
     Business.findByIdAndDelete(businessId)

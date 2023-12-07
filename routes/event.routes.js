@@ -3,7 +3,7 @@ const router = express.Router();
 
 const Event = require("../models/Event.model");
 const { isAuthenticated } = require("../middleware/jwt.middleware");
-const { checkEventOrganizer } = require("../middleware/event.middleware");
+// const { checkEventOrganizer } = require("../middleware/event.middleware");
 
 // GET - "/"        List of all events.
 router.get("/", (req, res) => {
@@ -46,19 +46,7 @@ router.post("/", isAuthenticated, (req, res) => {
     isVeganFriendly,
   } = req.body;
 
-  Event.create({
-    nameOfTheEvent,
-    location,
-    date,
-    organiser,
-    user,
-    price,
-    isPetFriendly,
-    isChildFriendly,
-    isEcoFriendly,
-    isAccessibilityFriendly,
-    isVeganFriendly,
-  })
+  Event.create({ ...req.body, user: req.payload._id })
     .then((eventFromDB) => {
       res.status(201).json(eventFromDB);
     })
@@ -68,22 +56,27 @@ router.post("/", isAuthenticated, (req, res) => {
 });
 
 // PUT - "/:eventId"        Update specified event by ID.
-router.put("/:eventId", isAuthenticated, checkEventOrganizer, (req, res) => {
-  Event.findByIdAndUpdate(req.params.eventId, req.body, { new: true })
-    .then((updatedEvent) => {
-      console.log(req.body, updatedEvent);
-      res.status(200).json(updatedEvent);
-    })
-    .catch((error) => {
-      next({ ...error, message: "Error updating Event." });
-    });
-});
+router.put(
+  "/:eventId",
+  isAuthenticated,
+  // checkEventOrganizer
+  (req, res) => {
+    Event.findByIdAndUpdate(req.params.eventId, req.body, { new: true })
+      .then((updatedEvent) => {
+        console.log(req.body, updatedEvent);
+        res.status(200).json(updatedEvent);
+      })
+      .catch((error) => {
+        next({ ...error, message: "Error updating Event." });
+      });
+  }
+);
 
 // DELETE - "/:eventId"         Delete specified event by ID.
 router.delete(
   "/:eventId",
   isAuthenticated,
-  checkEventOrganizer,
+  // checkEventOrganizer,
   (req, res, next) => {
     const { eventId } = req.params;
 

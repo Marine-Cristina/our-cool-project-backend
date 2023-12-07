@@ -5,6 +5,7 @@ const isAuthenticated = jwt({
   algorithms: ["HS256"],
   requestProperty: "payload",
   getToken: getTokenFromHeaders,
+  credentialsRequired: false,
 });
 
 function getTokenFromHeaders(req) {
@@ -13,6 +14,7 @@ function getTokenFromHeaders(req) {
     req.headers.authorization.split(" ")[0] === "Bearer"
   ) {
     const token = req.headers.authorization.split(" ")[1];
+    console.log("Extracted Token:", token);
     return token;
   }
 

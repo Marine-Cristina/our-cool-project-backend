@@ -25,8 +25,8 @@
 1. Check if the User Authentication middleware functions works properly.
 
 2. Create middleware functions to check the owner of each business and the organizer of each event:
-   [X] business.middleware.js
-   [X] event.middleware.js
+   [ ] business.middleware.js
+   [ ] event.middleware.js
 
 3. Add the previous middleware functions as callbacks in the routes so that:
 
@@ -40,6 +40,8 @@
    [X] Add properties to business and event Schemas.
 
 5. Enable user to apload a photo of them, their business or event.
-   [ ] npm install multer/Cloudinary
+   [ ] npm install multer / Cloudinary (Follow codealong in Student Portal)
    [ ] Update Schemas
    [ ] Update Routes files: set a multer storage, add a route to handle photo upload
+
+\*\* If we add new properties to the Models, add them too in the req.body of the routes.
