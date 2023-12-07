@@ -35,7 +35,7 @@ const businessSchema = new Schema(
       ],
     },
 
-    user: {
+    owner: {
       type: Schema.Types.ObjectId,
       ref: "User",
     },
