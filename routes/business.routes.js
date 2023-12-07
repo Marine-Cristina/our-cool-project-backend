@@ -37,7 +37,7 @@ router.post("/", isAuthenticated, (req, res, next) => {
     location,
     coordinates,
     typeOfBusiness,
-    user,
+    owner,
     isPetFriendly,
     isChildFriendly,
     isEcoFriendly,
