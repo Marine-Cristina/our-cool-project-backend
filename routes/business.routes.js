@@ -37,6 +37,7 @@ router.post("/", isAuthenticated, (req, res, next) => {
     location,
     coordinates,
     typeOfBusiness,
+    description,
     owner,
     isPetFriendly,
     isChildFriendly,
@@ -46,7 +47,7 @@ router.post("/", isAuthenticated, (req, res, next) => {
     contact,
   } = req.body;
 
-  Business.create({ ...req.body, user: req.payload._id })
+  Business.create({ ...req.body })
     .then((businessFromDB) => {
       res.status(201).json(businessFromDB);
     })

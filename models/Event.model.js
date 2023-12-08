@@ -39,6 +39,10 @@ const eventSchema = new Schema(
       default: "free",
     },
 
+    description: {
+      type: String,
+    },
+
     isPetFriendly: Boolean,
 
     isChildFriendly: Boolean,

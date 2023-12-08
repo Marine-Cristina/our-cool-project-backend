@@ -39,6 +39,7 @@ router.post("/", isAuthenticated, (req, res) => {
     organiser,
     user,
     price,
+    description,
     isPetFriendly,
     isChildFriendly,
     isEcoFriendly,
