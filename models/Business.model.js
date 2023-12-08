@@ -14,7 +14,16 @@ const businessSchema = new Schema(
     },
 
     coordinates: {
-      type: [Number],
+      type: {
+        latitude: {
+          type: Number,
+          required: true,
+        },
+        longitude: {
+          type: Number,
+          required: true,
+        },
+      },
       required: true,
       index: "2dsphere",
     },
@@ -24,9 +33,10 @@ const businessSchema = new Schema(
       enum: [
         "hotel",
         "restaurant",
-        "cafe",
+        "coffee shop",
         "store",
-        "musueum",
+        "museum",
+        "theatre",
         "brand",
         "supermarket",
         "transport",
