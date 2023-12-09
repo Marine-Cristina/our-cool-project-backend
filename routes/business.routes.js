@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
 });
 
 // GET - "/:businessId"        Details of one business by ID.
-router.get("/:businessId", isAuthenticated, (req, res) => {
+router.get("/:businessId", isAuthenticated, (req, res, next) => {
   const { businessId } = req.params;
 
   Business.findById(businessId)
@@ -31,7 +31,7 @@ router.get("/:businessId", isAuthenticated, (req, res) => {
 });
 
 // POST - "/"       Create new business.
-router.post("/", isAuthenticated, (req, res, next) => {
+router.post("/new", isAuthenticated, (req, res, next) => {
   const {
     name,
     location,
