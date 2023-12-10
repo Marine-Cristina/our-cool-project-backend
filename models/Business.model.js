@@ -24,7 +24,7 @@ const businessSchema = new Schema(
           required: true,
         },
       },
-      required: true,
+      required: false,
       index: "2dsphere",
     },
 
@@ -33,7 +33,7 @@ const businessSchema = new Schema(
       enum: [
         "hotel",
         "restaurant",
-        "coffee shop",
+        "coffee-shop",
         "store",
         "museum",
         "theatre",

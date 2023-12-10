@@ -17,12 +17,6 @@ const userSchema = new Schema(
       type: String,
       required: [true, "Name is required."],
     },
-
-    role: {
-      type: String,
-      enum: ["user", "owner"],
-      default: "user",
-    },
   },
   {
     timestamps: true,
