@@ -31,7 +31,7 @@ router.get("/:businessId", isAuthenticated, (req, res, next) => {
 });
 
 // POST - "/"       Create new business.
-router.post("/new", isAuthenticated, (req, res, next) => {
+router.post("/", isAuthenticated, (req, res, next) => {
   const {
     name,
     location,
