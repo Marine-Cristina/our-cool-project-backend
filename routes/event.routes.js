@@ -31,7 +31,7 @@ router.get("/:eventId", isAuthenticated, (req, res, next) => {
 });
 
 // POST - "/"       Create new event.
-router.post("/", isAuthenticated, (req, res) => {
+router.post("/", isAuthenticated, (req, res, next) => {
   const {
     nameOfTheEvent,
     location,

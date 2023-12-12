@@ -20,7 +20,7 @@ const eventSchema = new Schema(
     // },
 
     date: {
-      type: Date,
+      type: [],
     },
 
     organizer: {
