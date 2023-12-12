@@ -13,20 +13,20 @@ const businessSchema = new Schema(
       default: "Point",
     },
 
-    coordinates: {
-      type: {
-        latitude: {
-          type: Number,
-          required: true,
-        },
-        longitude: {
-          type: Number,
-          required: true,
-        },
-      },
-      required: false,
-      index: "2dsphere",
-    },
+    // coordinates: {
+    //   type: {
+    //     latitude: {
+    //       type: Number,
+    //       required: true,
+    //     },
+    //     longitude: {
+    //       type: Number,
+    //       required: true,
+    //     },
+    //   },
+    //   required: false,
+    //   index: "2dsphere",
+    // },
 
     typeOfBusiness: {
       type: String,
@@ -81,7 +81,7 @@ const businessSchema = new Schema(
 
     contact: {
       type: String,
-      required: [true, "Contact info is required"],
+      // required: [true, "Contact info is required"],
     },
   },
 

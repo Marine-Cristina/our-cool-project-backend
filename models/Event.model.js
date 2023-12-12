@@ -13,11 +13,11 @@ const eventSchema = new Schema(
       default: "Point",
     },
 
-    coordinates: {
-      type: [Number],
-      required: true,
-      index: "2dsphere",
-    },
+    // coordinates: {
+    //   type: [Number],
+    //   required: true,
+    //   index: "2dsphere",
+    // },
 
     date: {
       type: Date,
@@ -36,7 +36,6 @@ const eventSchema = new Schema(
     price: {
       type: Number,
       required: [true, "Price is required"],
-      default: "free",
     },
 
     description: {
