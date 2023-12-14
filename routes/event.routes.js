@@ -1,9 +1,12 @@
 const express = require("express");
 const router = express.Router();
-
+const multer = require("multer");
 const Event = require("../models/Event.model");
 const { isAuthenticated } = require("../middleware/jwt.middleware");
+const storage = multer.memoryStorage();  
+//const fileUploader = multer({ storage });
 // const { checkEventOrganizer } = require("../middleware/event.middleware");
+const fileUploader = require("../config/cloudinary.config");
 
 // GET - "/"        List of all events.
 router.get("/", (req, res) => {
@@ -92,5 +95,21 @@ router.delete(
       });
   }
 );
+
+// POST "/api/upload" => Route that receives the image, sends it to Cloudinary via the fileUploader and returns the image URL
+router.post("/upload", fileUploader.single("imageUrl"), async (req, res, next) => {
+  try {
+    if (!req.file) {
+    next(new Error("No file uploaded!"));
+    return;
+  }
+  res.json({ fileUrl: req.file.path });
+  } catch (error) {
+   console.log(error) 
+  }
+  
+});
+
+
 
 module.exports = router;

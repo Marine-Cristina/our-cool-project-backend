@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
+const fileUploader = require("../config/cloudinary.config");
 
+const multer = require("multer");
 const Business = require("../models/Business.model");
 const { isAuthenticated } = require("../middleware/jwt.middleware");
 // const { checkBusinessOwner } = require("../middleware/business.middleware");
@@ -91,5 +93,18 @@ router.delete(
       });
   }
 );
+
+router.post("/upload", fileUploader.single("imageUrl"), async (req, res, next) => {
+  try {
+    if (!req.file) {
+    next(new Error("No file uploaded!"));
+    return;
+  }
+  res.json({ fileUrl: req.file.path });
+  } catch (error) {
+   console.log(error) 
+  }
+  
+});
 
 module.exports = router;

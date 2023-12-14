@@ -33,6 +33,10 @@ const eventSchema = new Schema(
       required: [true, "Name of the event is required"],
     },
 
+    imageURL: {
+      type : String,
+    },
+
     country: {
       type: countrySchema,
       required: true,
@@ -86,11 +90,13 @@ const eventSchema = new Schema(
       type: String,
       ref: "Bussines.contact",
     },
+
   },
 
   {
     timestamps: true,
   }
+
 );
 
 const Event = model("Event", eventSchema);
