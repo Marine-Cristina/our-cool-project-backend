@@ -7,6 +7,10 @@ const eventSchema = new Schema(
       required: [true, "Name of the event is required"],
     },
 
+    imageURL: {
+      type : String,
+    },
+
     location: {
       type: String,
       enum: ["Burgos", "Paris"],
