@@ -1,5 +1,32 @@
 const { Schema, model } = require("mongoose");
 
+const countrySchema = new Schema({
+  listIdx: {
+    type: Number,
+    required: true,
+    unique: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  iso2: {
+    type: String,
+    required: true,
+  },
+});
+
+const stateSchema = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  state_code: {
+    type: String,
+    required: true,
+  },
+});
+
 const businessSchema = new Schema(
   {
     name: {
@@ -7,10 +34,14 @@ const businessSchema = new Schema(
       required: [true, "Name is required"],
     },
 
-    location: {
-      type: String,
-      enum: ["Burgos", "Paris"],
-      default: "Point",
+    country: {
+      type: countrySchema,
+      required: true,
+    },
+
+    state: {
+      type: stateSchema,
+      required: true,
     },
 
     // coordinates: {
@@ -81,7 +112,7 @@ const businessSchema = new Schema(
 
     contact: {
       type: String,
-      // required: [true, "Contact info is required"],
+      required: [true, "Contact info is required"],
     },
   },
 
