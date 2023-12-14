@@ -44,6 +44,10 @@ const businessSchema = new Schema(
       required: true,
     },
 
+    imageURL: {
+        type : String,
+      },
+
     // coordinates: {
     //   type: {
     //     latitude: {
