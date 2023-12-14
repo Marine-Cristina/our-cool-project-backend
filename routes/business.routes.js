@@ -34,8 +34,8 @@ router.get("/:businessId", isAuthenticated, (req, res, next) => {
 router.post("/", isAuthenticated, (req, res, next) => {
   const {
     name,
-    location,
-    coordinates,
+    country,
+    state,
     typeOfBusiness,
     description,
     owner,

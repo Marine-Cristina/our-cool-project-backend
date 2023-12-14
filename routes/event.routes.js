@@ -33,10 +33,11 @@ router.get("/:eventId", isAuthenticated, (req, res, next) => {
 // POST - "/"       Create new event.
 router.post("/", isAuthenticated, (req, res, next) => {
   const {
-    nameOfTheEvent,
-    location,
+    name,
+    country,
+    state,
     date,
-    organiser,
+    organizer,
     user,
     price,
     description,
@@ -45,6 +46,7 @@ router.post("/", isAuthenticated, (req, res, next) => {
     isEcoFriendly,
     isAccessibilityFriendly,
     isVeganFriendly,
+    contact,
   } = req.body;
 
   Event.create({ ...req.body, user: req.payload._id })
