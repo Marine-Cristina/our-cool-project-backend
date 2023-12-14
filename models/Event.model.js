@@ -1,8 +1,34 @@
 const { Schema, model } = require("mongoose");
 
+const countrySchema = new Schema({
+  listIdx: {
+    type: Number,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  iso2: {
+    type: String,
+    required: true,
+  },
+});
+
+const stateSchema = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  state_code: {
+    type: String,
+    required: true,
+  },
+});
+
 const eventSchema = new Schema(
   {
-    nameOfTheEvent: {
+    name: {
       type: String,
       required: [true, "Name of the event is required"],
     },
@@ -15,6 +41,14 @@ const eventSchema = new Schema(
       type: String,
       enum: ["Burgos", "Paris"],
       default: "Point",
+    country: {
+      type: countrySchema,
+      required: true,
+    },
+
+    state: {
+      type: stateSchema,
+      required: true,
     },
 
     // coordinates: {
@@ -60,11 +94,13 @@ const eventSchema = new Schema(
       type: String,
       ref: "Bussines.contact",
     },
+
   },
 
   {
     timestamps: true,
   }
+
 );
 
 const Event = model("Event", eventSchema);
