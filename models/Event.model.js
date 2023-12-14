@@ -37,10 +37,6 @@ const eventSchema = new Schema(
       type : String,
     },
 
-    location: {
-      type: String,
-      enum: ["Burgos", "Paris"],
-      default: "Point",
     country: {
       type: countrySchema,
       required: true,
