@@ -5,7 +5,7 @@ const fileUploader = require("../config/cloudinary.config");
 const multer = require("multer");
 const Business = require("../models/Business.model");
 const { isAuthenticated } = require("../middleware/jwt.middleware");
-// const { checkBusinessOwner } = require("../middleware/business.middleware");
+const { isOwner } = require("../middleware/business.middleware");
 
 // GET - "/"        List of all Businesses.
 router.get("/", (req, res) => {
@@ -59,52 +59,47 @@ router.post("/", isAuthenticated, (req, res, next) => {
 });
 
 // PUT - "/:businessId"        Update specified business by ID.
-router.put(
-  "/:businessId",
-  isAuthenticated,
-  // checkBusinessOwner,
-  (req, res, next) => {
-    const { businessId } = req.params;
+router.put("/:businessId", isAuthenticated, isOwner, (req, res, next) => {
+  const { businessId } = req.params;
 
-    Business.findByIdAndUpdate(businessId, req.body, { new: true })
-      .then((updatedBusiness) => {
-        console.log(req.body, updatedBusiness);
-        res.status(200).json(updatedBusiness);
-      })
-      .catch((error) => {
-        next({ ...error, message: "Failed to update the business" });
-      });
-  }
-);
+  Business.findByIdAndUpdate(businessId, req.body, { new: true })
+    .then((updatedBusiness) => {
+      console.log(req.body, updatedBusiness);
+      res.status(200).json(updatedBusiness);
+    })
+    .catch((error) => {
+      next({ ...error, message: "Failed to update the business" });
+    });
+});
 
 // DELETE - "/:businessId"         Delete specified business by ID.
-router.delete(
-  "/:businessId",
-  isAuthenticated,
-  // checkBusinessOwner,
-  (req, res, next) => {
-    const { businessId } = req.params;
-    Business.findByIdAndDelete(businessId)
-      .then(() => {
-        res.status(200).send();
-      })
-      .catch((error) => {
-        next({ error, message: "Error deleting Business" });
-      });
+router.delete("/:businessId", isAuthenticated, isOwner, (req, res, next) => {
+  const { businessId } = req.params;
+  Business.findByIdAndDelete(businessId)
+    .then(() => {
+      res.status(200).send();
+    })
+    .catch((error) => {
+      next({ error, message: "Error deleting Business" });
+    });
+});
+
+// POST "/upload" => Route that receives the image, sends it to Cloudinary via the fileUploader and returns the image URL
+router.post(
+  "/upload",
+  fileUploader.single("imageUrl"),
+  isOwner,
+  async (req, res, next) => {
+    try {
+      if (!req.file) {
+        next(new Error("No file uploaded!"));
+        return;
+      }
+      res.json({ fileUrl: req.file.path });
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
-
-router.post("/upload", fileUploader.single("imageUrl"), async (req, res, next) => {
-  try {
-    if (!req.file) {
-    next(new Error("No file uploaded!"));
-    return;
-  }
-  res.json({ fileUrl: req.file.path });
-  } catch (error) {
-   console.log(error) 
-  }
-  
-});
 
 module.exports = router;

@@ -1,6 +1,6 @@
 const Business = require("../models/Business.model");
 
-const checkBusinessOwner = async (req, res, next) => {
+const isOwner = async (req, res, next) => {
   try {
     const businessId = req.params.businessId;
     const userId = req.user !== undefined ? req.user._id : null;
@@ -26,5 +26,5 @@ const checkBusinessOwner = async (req, res, next) => {
 };
 
 module.exports = {
-  checkBusinessOwner,
+  isOwner,
 };

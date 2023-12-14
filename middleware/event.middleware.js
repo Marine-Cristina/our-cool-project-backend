@@ -1,6 +1,6 @@
 const Event = require("../models/Event.model");
 
-const checkEventOrganizer = async (req, res, next) => {
+const isOrganizer = async (req, res, next) => {
   try {
     const eventId = req.params.eventId;
     const userId = req.user._id;
@@ -24,5 +24,5 @@ const checkEventOrganizer = async (req, res, next) => {
 };
 
 module.exports = {
-  checkEventOrganizer,
+  isOrganizer,
 };
