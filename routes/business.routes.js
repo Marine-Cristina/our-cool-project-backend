@@ -90,7 +90,7 @@ router.put("/:businessId", isAuthenticated, isOwner, (req, res, next) => {
 });
 
 // DELETE - "/:businessId"         Delete specified business by ID.
-router.delete("/:businessId", isAuthenticated, isOwner, (req, res, next) => {
+router.delete("/:businessId", isAuthenticated, (req, res, next) => {
   const { businessId } = req.params;
   Business.findByIdAndDelete(businessId)
     .then(() => {
@@ -105,7 +105,6 @@ router.delete("/:businessId", isAuthenticated, isOwner, (req, res, next) => {
 router.post(
   "/upload",
   fileUploader.single("imageUrl"),
-  isOwner,
   async (req, res, next) => {
     try {
       if (!req.file) {

@@ -62,7 +62,7 @@ router.post("/", isAuthenticated, (req, res, next) => {
 });
 
 // PUT - "/:eventId"        Update specified event by ID.
-router.put("/:eventId", isAuthenticated, isOrganizer, (req, res, next) => {
+router.put("/:eventId", isAuthenticated, (req, res, next) => {
   Event.findByIdAndUpdate(req.params.eventId, req.body, { new: true })
     .then((updatedEvent) => {
       console.log(req.body, updatedEvent);
@@ -74,7 +74,7 @@ router.put("/:eventId", isAuthenticated, isOrganizer, (req, res, next) => {
 });
 
 // DELETE - "/:eventId"         Delete specified event by ID.
-router.delete("/:eventId", isAuthenticated, isOrganizer, (req, res, next) => {
+router.delete("/:eventId", isAuthenticated, (req, res, next) => {
   const { eventId } = req.params;
 
   Event.findByIdAndDelete(eventId)
@@ -90,7 +90,6 @@ router.delete("/:eventId", isAuthenticated, isOrganizer, (req, res, next) => {
 router.post(
   "/upload",
   fileUploader.single("imageUrl"),
-  isOrganizer,
   async (req, res, next) => {
     try {
       if (!req.file) {
