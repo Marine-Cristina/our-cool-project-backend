@@ -76,7 +76,7 @@ router.post("/", isAuthenticated, (req, res, next) => {
 });
 
 // PUT - "/:businessId"        Update specified business by ID.
-router.put("/:businessId", isAuthenticated, isOwner, (req, res, next) => {
+router.put("/:businessId", isAuthenticated, (req, res, next) => {
   const { businessId } = req.params;
 
   Business.findByIdAndUpdate(businessId, req.body, { new: true })
