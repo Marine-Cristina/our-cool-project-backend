@@ -4,7 +4,6 @@ const countrySchema = new Schema({
   listIdx: {
     type: Number,
     required: true,
-    unique: true,
   },
   name: {
     type: String,
@@ -45,8 +44,8 @@ const businessSchema = new Schema(
     },
 
     imageURL: {
-        type : String,
-      },
+      type: String,
+    },
 
     // coordinates: {
     //   type: {

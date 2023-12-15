@@ -9,7 +9,24 @@ const { isOwner } = require("../middleware/business.middleware");
 
 // GET - "/"        List of all Businesses.
 router.get("/", (req, res) => {
-  Business.find({})
+  const query = {};
+
+  // Build the query based on passed query params, e.g., name, category
+  if (req.query.country) {
+    query["country.iso2"] = req.query.country;
+  }
+
+  if (req.query.state) {
+    query["state.state_code"] = req.query.state;
+  }
+
+  if (req.query.friendlyType) {
+    req.query.friendlyType.split(",").forEach((type) => {
+      query[type] = true;
+    });
+  }
+
+  Business.find(query)
     .then((businesses) => {
       console.log("retrived businesses", businesses);
       res.json(businesses);
